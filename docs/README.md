@@ -112,7 +112,7 @@ Los 2 siguientes pasos se pueden repetir cuantas veces quieras
 
     Por debajo git pull usa dos comandos que ya hemos visto.
 
-    1. Git fetch
+    1. Git fetch (te trae a la zona de commit del repositorio local todos los commit que no tengas del repositorio remoto)
     2. git merge
     
     (Internamente realiza estas dos cosas)
