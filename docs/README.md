@@ -13,7 +13,7 @@ Primero que nada hay que tener claroq ue existen dos repositorio uno que cada pe
 
 ## Normas de repositorios (local y remoto)
 
-1. La tabla main no se toca sino se realiza una pull request (más abajo se explica que es la pull request)
+1. La rama main no se toca hasta realizar el pull request (más abajo se explica que es la pull request)
 2. Cada uno localmente trabaja en una rama distinta a la main
 
 ## Pasos a seguir
@@ -32,7 +32,8 @@ Los 2 siguientes pasos se pueden repetir cuantas veces quieras
 6. git push origin \<nombreDeturamaCreada> (Esto subira todas los commits al repositorio remoto) (Este paso lo puedes realizar todos las veces que quieras, simplemente estaras añadiendo commit a tu rama del repositorio remoto la cual solo tocas tu)
 
 7. Avisa de has acabado tu parte
-8. Realiza una pull request (ya explicare como hacerla)
+8. realizar un último push si hay algun commit que te falta por subir a tu rama 
+9. Realiza una pull request (ya explicare como hacerla)
 
 
 ### Comandos de git 
