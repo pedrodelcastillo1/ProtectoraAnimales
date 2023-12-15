@@ -17,7 +17,7 @@ class Adopcion extends Crud
     const TABLA = "adopcion";
 
     // Constructor 
-    public function __construct($id, $idAnimal, $idUsuario, $fecha, $razon)
+    public function __construct($id="", $idAnimal="", $idUsuario="", $fecha="", $razon="")
     {
         // Invoca al constructor padre enviándole el nombre de la tabla (definido en la constante de la clase)
         parent::__construct(self::TABLA);
