@@ -74,17 +74,14 @@ class Adopcion extends Crud
         try
         {
             // Inserta mediante una consulta preparada en la tabla correspondiente (definida en la constante de la clase)
-            $sqlInsert = "INSERT INTO " . self::TABLA . " (id, idAnimal, idUsuario, fecha, razon) VALUES (:id, :idAnimal, :idUsuario, :fecha, :razon)";
+            $sqlInsert = "INSERT INTO " . self::TABLA . " (idAnimal, idUsuario, fecha, razon) VALUES (:idAnimal, :idUsuario, :fecha, :razon)";
 
             // $this -> conexion, es el manejador de la conexion a la BBDD, lo escribimos asi por la sintaxis de POO
-            $insertarPreparado = $this -> conexion -> prepare($sqlInsert);
-
-            $insertarPreparado -> bindParam(":id", $this -> id);
+            $insertarPreparado = $this -> conexion -> prepare($sqlInsert);  
             $insertarPreparado -> bindParam(":idAnimal", $this -> idAnimal);
             $insertarPreparado -> bindParam(":idUsuario", $this -> idUsuario);
             $insertarPreparado -> bindParam(":fecha", $this -> fecha);
             $insertarPreparado -> bindParam(":razon", $this -> razon);
-
             if ($insertarPreparado -> execute())
             {
                 echo "La adopción se ha registrado correctamente. <br>";
