@@ -1,4 +1,25 @@
-# Mameluco
+# Cosas que faltan por hacer
+- [x]Terminar introducir Adopcion. [Pedro]
+- Terminar del todo adopcion [Pedro]
+
+- Cuando pulses introducidir Animal redirigir a la vista de la tabla de animal [Andres]
+- Separar el formador tabla en una vista a parte. (va a ser una plantilla) [Andres]
+- Cambiar los dos curl a algo normal [Andres]
+
+
+- Unificar controlador, automatizado. [Christian]
+- Crear y actualizar automatizados en el Crud [Christian]
+ 
+
+
+
+## Si nos da la vida:
+
+    - Cambiar a include todos los headers
+	    Pasos: Generar un index con gestor de ruta, para que llame de forma dinamica a los controladores usuario, animal y adopcion 
+	      (esto va a cambiar casi todo el codigo)
+
+
 # Protectora de Animales
 
 Implementación de la arquitectura/patrón Modelo-Vista-Controlador en el trabajo de la Protectora de Animales.
