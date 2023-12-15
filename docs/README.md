@@ -1,8 +1,8 @@
 # Cosas que faltan por hacer
 - [x]Terminar introducir Adopcion. [Pedro]
-- Terminar del todo adopcion [Pedro]
+- [x]Terminar del todo adopcion [Pedro]
 
-- Cuando pulses introducidir Animal redirigir a la vista de la tabla de animal [Andres]
+- [x]Cuando pulses introducidir Animal redirigir a la vista de la tabla de animal [Andres]
 - Separar el formador tabla en una vista a parte. (va a ser una plantilla) [Andres]
 - Cambiar los dos curl a algo normal [Andres]
 
