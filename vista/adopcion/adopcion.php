@@ -6,7 +6,7 @@
     <title>Adopcion</title>
 </head>
 <body>
-    <form action="http://localhost/ProtectoraAnimales/controlador/adopcion.php" method="GET">
+    <form id="formularioBotones" action="http://localhost/ProtectoraAnimales/controlador/adopcion.php" method="GET">
         <button name="atras" value="1">atras</button>
         <button name="introducirAdopcion" value="1">Introducir una nueva Adopcion</button>
     </form>

@@ -1,5 +1,5 @@
 <?php
-const SERVERNAME = "localhost:3307";
+const SERVERNAME = "localhost";
 const DVNAME = "protectora_animales";
 const USERNANME = "root";
 const PASSWORD = "";
