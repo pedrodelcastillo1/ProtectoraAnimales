@@ -8,10 +8,10 @@
 <body>
     <form action="http://localhost/ProtectoraAnimales/controlador/adopcion.php" method="POST">
         <label for="">Id Animal</label>
-        <input type="text" name="id_animal"><br>
+        <input type="text" name="idAnimal"><br>
 
         <label for="">Id Usuario</label>
-        <input type="text" name="id_usuario"><br>
+        <input type="text" name="idUsuario"><br>
 
         <label for="">Fecha</label>
         <input type="date" name="fecha"><br>
