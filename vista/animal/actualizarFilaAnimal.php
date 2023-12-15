@@ -20,8 +20,8 @@
         <label for="">Edad</label>
         <input type="number" name="edad" value="<?=$_GET['edad']?>">
 
-        <button name="actualizarAnimal" value="1">Actualizar Animal</button>
-        <input type="hidden" name="idAnimal" value="<?=$_GET['id']?>">
+        <button>Actualizar Animal</button>
+        <input type="hidden" name="id" value="<?=$_GET['id']?>">
     </form>
 </body>
 </html>

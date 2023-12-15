@@ -116,7 +116,7 @@ class ControladorUsuario
 
     public static function actualizarUsuario()
     {
-        $actualizarUsuario = new Usuario($_POST['idUsuario'], $_POST['nombre'], $_POST['apellido'], $_POST['sexo'], $_POST['direccion'], $_POST['telefono']);
+        $actualizarUsuario = new Usuario($_POST['id'], $_POST['nombre'], $_POST['apellido'], $_POST['sexo'], $_POST['direccion'], $_POST['telefono']);
 
         $actualizarUsuario -> actualizar();
 
@@ -166,7 +166,7 @@ if (isset($_GET['actualizaFila']))
     ControladorUsuario::mostrarVistaActualizarUsuario();
 }
 
-if (isset($_POST['actualizarUsuario'])) 
+if (isset($_POST['id'])) 
 {
     ControladorUsuario::actualizarUsuario();
 }

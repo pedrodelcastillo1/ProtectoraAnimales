@@ -119,6 +119,8 @@ class ControladorAnimal
 
         $actualizarAnimal -> actualizar();
 
+        echo $actualizarAnimal;
+
         header('Location: http://localhost/ProtectoraAnimales/vista/animal/animal.php');
     }
 
@@ -165,7 +167,7 @@ if (isset($_GET['actualizaFila']))
     ControladorAnimal::mostrarVistaActualizarAnimal();
 }
 
-if (isset($_POST['actualizarAnimal'])) 
+if (isset($_POST['id'])) 
 {
     ControladorAnimal::actualizarAnimal();
 }
