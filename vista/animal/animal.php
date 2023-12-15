@@ -6,7 +6,7 @@
     <title>Animal</title>
 </head>
 <body>
-    <form action="http://localhost/ProtectoraAnimales/controlador/animal.php" method="GET">
+    <form id = "formularioBotones" action="http://localhost/ProtectoraAnimales/controlador/animal.php" method="GET">
         <button name="atras" value="1">atras</button>
         <button name="introducirAnimal" value="1">Introducir un nuevo animal</button>
     </form>

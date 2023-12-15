@@ -19,7 +19,7 @@ else if (isset($_GET['introducirAdopcion']))
 //Si no se cumple ninguno de esto significa que estas en la vista introducirUsuario.php
 if (isset($_POST['botonInsertarPulsado']))
 {
-    $insertarAdopcion = new Adopcion("",$_POST["idAnimal"],$_POST["idUusario"],$_POST["fecha"],$_POST["razon"]);
+    $insertarAdopcion = new Adopcion("",$_POST["idAnimal"],$_POST["idUsuario"],$_POST["fecha"],$_POST["razon"]);
     $insertarAdopcion -> crear();
     header('Location: http://localhost/ProtectoraAnimales/vista/adopcion/introducirAdopcion.php');
 }

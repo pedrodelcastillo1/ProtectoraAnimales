@@ -2,7 +2,7 @@
 
 require_once 'Conexion.php';
 
-abstract class Crud extends Conexion
+class Crud extends Conexion
 {
     // Atributos privados - Tabla (Nombre de la tabla a operar) y Conexion (Manejador de la conexion a la BBDD)
     private $tabla; 
@@ -107,9 +107,131 @@ abstract class Crud extends Conexion
             }
     }
 
-    // Métodos abstractos a implementar en las clases hijas y/o automatizarlas aquí en la clase padre
-    abstract function crear();
-    abstract function actualizar();
+    private function obtenerColumnasTabla()
+    {
+        $consulta = "DESCRIBE " . $this -> tabla;
+        $resultado = $this -> conexion -> query($consulta);
+        $columnas = $resultado -> fetchAll(PDO::FETCH_COLUMN);
+        return $columnas;
+    }
+
+    // Métodos crear y actualizar
+    public function crear()
+    {
+        try 
+        {
+            // Validar que hay datos en el formulario
+            if (empty($_POST)) 
+            {
+                throw new Exception("No hay datos para insertar", 1);
+            }
+
+            // Obtener las columnas válidas de la tabla
+            $columnasValidas = $this -> obtenerColumnasTabla();
+
+            // Filtrar las claves del array $_POST para incluir solo las columnas válidas
+            $columnasPost = array_intersect(array_keys($_POST), $columnasValidas);
+
+            // Excluir el campo 'botonInsertarPulsado' si está presente
+            $columnasPost = array_diff($columnasPost, ['botonInsertarPulsado']);
+
+            // Construir la consulta SQL
+            $sqlInsert = "INSERT INTO " . $this -> tabla . " (";
+            $sqlValues = "VALUES (";
+
+            foreach ($columnasPost as $columna) 
+            {
+                $sqlInsert .= "$columna, ";
+                $sqlValues .= ":$columna, ";
+            }
+
+            $sqlInsert = rtrim($sqlInsert, ", ") . ") ";
+            $sqlValues = rtrim($sqlValues, ", ") . ")";
+            
+            $sqlFinal = $sqlInsert . $sqlValues;
+
+            // Preparar la consulta
+            $insertarDatos = $this -> conexion -> prepare($sqlFinal);
+
+            // Asignar valores a los parámetros desde $_POST
+            foreach ($columnasPost as $columna) 
+            {
+                $insertarDatos -> bindParam(":$columna", $_POST[$columna]);
+            }
+
+            // Ejecutar la inserción
+            $insertarDatos -> execute();
+            
+            echo "Registro creado correctamente.";
+        } 
+            
+            catch (PDOException $e) 
+            {
+                throw new Exception("Error al crear el registro: " . $e -> getMessage());
+            }
+    }
+
+    public function actualizar()
+    {
+        try 
+        {
+            // Validar que hay datos en el formulario
+            if (empty($_POST)) 
+            {
+                throw new Exception("No hay datos para actualizar", 1);
+            }
+
+            // Obtener las columnas válidas de la tabla
+            $columnasValidas = $this->obtenerColumnasTabla();
+
+            // Filtrar las claves del array $_POST para incluir solo las columnas válidas
+            $columnasUpdate = array_intersect(array_keys($_POST), $columnasValidas);
+
+            // Excluir el campo 'botonInsertarPulsado' si está presente
+            $columnasUpdate = array_diff($columnasUpdate, ['botonInsertarPulsado']);
+
+            // Construir la consulta SQL de actualización
+            $sqlUpdate = "UPDATE " . $this->tabla . " SET ";
+
+            foreach ($columnasUpdate as $columna) 
+            {
+                $sqlUpdate .= "$columna = :$columna, ";
+            }
+
+            $sqlUpdate = rtrim($sqlUpdate, ", ") . " ";
+            $sqlWhere = "WHERE id = :id"; // Cambia 'id' por la columna que actúa como identificador único
+
+            $sqlFinal = $sqlUpdate . $sqlWhere;
+
+            // Preparar la consulta
+            $actualizarDatos = $this->conexion->prepare($sqlFinal);
+
+            // Asignar valores a los parámetros desde $_POST
+            foreach ($columnasUpdate as $columna) 
+            {
+                $actualizarDatos->bindParam(":$columna", $_POST[$columna]);
+            }
+
+            // Asignar el valor del identificador único
+            $actualizarDatos->bindParam(":id", $_POST['id']); // Cambia 'id' por el nombre de la columna que actúa como identificador único
+
+            // Ejecutar la actualización
+            $actualizarDatos->execute();
+            
+            echo "Registro actualizado correctamente.";
+        } 
+            catch (PDOException $e) 
+            {
+                throw new Exception("Error al actualizar el registro: " . $e->getMessage());
+            }
+            
+            catch (Exception $e) 
+            {
+                echo $e->getMessage();
+            }
+    }
+
+
 
 }
 
