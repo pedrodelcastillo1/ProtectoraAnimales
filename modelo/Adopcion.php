@@ -69,7 +69,7 @@ class Adopcion extends Crud
 
     /* ------------------------------------------------------------------------- Métodos ------------------------------------------------------------------------------------------------ */ 
     // Método Crear (implementación del método abstracto de la clase padre)
-    public function crear()
+    /*public function crear()
     {
         try
         {
@@ -131,7 +131,7 @@ class Adopcion extends Crud
             {
                 echo "Conexion fallida. " . $e -> getMessage();
             }
-    }
+    }*/
 }
 
 ?>

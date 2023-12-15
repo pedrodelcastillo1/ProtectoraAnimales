@@ -7,7 +7,7 @@ class ControladorAdopcion
     {
         echo self::formadorTablaHTML(); // Se manda a la vista que pide la tabla usuario
     }
-
+    //Creador de tabla html para todas las clases (Adopcion,Animal,Usuario)
     public static function retrocederAPaginaPrincipal()
     {
         header('Location: http://localhost/ProtectoraAnimales'); // Cuando se pulsa el boton de ir hacia atras
@@ -71,20 +71,20 @@ class ControladorAdopcion
     {
         //Actualizar fila
         try {
-            $pathFichero='http://localhost/ProtectoraAnimales/vista/adopcion/actualizarFilaAdopcion.php?idUsuario='. $_GET['actualizaFila'];//ActualizarFila contiene el id del usuario a modificar
-            $adopcion=new Adopcion();
-            $adopcion=$adopcion->obtieneDeId($_GET['actualizaFila']);
+            $pathFichero = 'http://localhost/ProtectoraAnimales/vista/adopcion/actualizarFilaAdopcion.php?idUsuario=' . $_GET['actualizaFila']; //ActualizarFila contiene el id del usuario a modificar
+            $adopcion = new Adopcion();
+            $adopcion = $adopcion->obtieneDeId($_GET['actualizaFila']);
             foreach ($adopcion[0] as $key => $value) {
-                $pathFichero.="&".$key."=".$value;
+                $pathFichero .= "&" . $key . "=" . $value;
             }
-            header('Location:'. $pathFichero);
+            header('Location:' . $pathFichero);
         } catch (Exception $e) {
             echo $e;
         }
     }
     public static function actualizarAdopcion()
     {
-        $actualizarAdopcion = new Adopcion($_POST['idAdopcion'],$_POST['idAnimal'], $_POST['idUsuario'], $_POST['fecha'], $_POST['razon']);
+        $actualizarAdopcion = new Adopcion($_POST['id'], $_POST['idAnimal'], $_POST['idUsuario'], $_POST['fecha'], $_POST['razon']);
         $actualizarAdopcion->actualizar();
         header('Location: http://localhost/ProtectoraAnimales/vista/adopcion/adopcion.php');
     }
@@ -101,7 +101,6 @@ class ControladorAdopcion
         }
     }
 }
-
 
 if (isset($_GET['reclamoTabla'])) {
     ControladorAdopcion::generarTabla();
@@ -120,7 +119,7 @@ if (isset($_POST['botonInsertarPulsado'])) {
 if (isset($_GET['actualizaFila'])) {
     ControladorAdopcion::mostrarVistaActualizarAdopcion();
 }
-if (isset($_POST['actualizarAdopcion'])) {
+if (isset($_POST['id'])) {
 
     ControladorAdopcion::actualizarAdopcion();
 }

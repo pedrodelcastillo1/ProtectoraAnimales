@@ -19,7 +19,7 @@ class Animal extends Crud
     const TABLA = "animal";
 
     // Constructor 
-    public function __construct($id, $nombre, $especie, $raza, $genero, $color, $edad)
+    public function __construct($id = "", $nombre = "", $especie = "", $raza = "", $genero = "", $color = "", $edad = "")
     {
         // Invoca al constructor padre enviándole el nombre de la tabla (definido en la constante de la clase)
         parent::__construct(self::TABLA);
@@ -73,7 +73,7 @@ class Animal extends Crud
 
     /* ------------------------------------------------------------------------- Métodos ------------------------------------------------------------------------------------------------ */
     // Método Crear (implementación del método abstracto de la clase padre)
-    public function crear()
+    /*public function crear()
     {
         try
         {   
@@ -142,7 +142,7 @@ class Animal extends Crud
             {
                 echo "Conexion fallida. " . $e -> getMessage();
             }
-    }
+    }*/
 }
 
 ?>

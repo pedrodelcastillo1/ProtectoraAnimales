@@ -16,8 +16,8 @@
         <label for="">razon</label>
         <input type="text" name="razon" value="<?=$_GET['razon']?>">
 
-        <button name="actualizarAdopcion" value="1">Actualizar adopcion</button>
-        <input type="hidden" name="idAdopcion" value="<?=$_GET['id']?>">
+        <button>Actualizar adopcion</button>
+        <input type="hidden" name="id" value="<?=$_GET['id']?>">
     </form>
 </body>
 </html>

@@ -18,8 +18,8 @@
         <label for="">telefono</label>
         <input type="number" name="telefono" value="<?=$_GET['telefono']?>">
 
-        <button name="actualizarUsuario" value="1">Actualizar usuario</button>
-        <input type="hidden" name="idUsuario" value="<?=$_GET['id']?>">
+        <button>Actualizar usuario</button>
+        <input type="hidden" name="id" value="<?=$_GET['id']?>">
     </form>
 </body>
 </html>
