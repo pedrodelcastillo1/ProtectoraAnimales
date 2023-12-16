@@ -3,7 +3,7 @@
 - [x]Terminar del todo adopcion [Pedro]
 
 - [x]Cuando pulses introducidir Animal redirigir a la vista de la tabla de animal [Andres]
-- Separar el formador tabla en una vista a parte. (va a ser una plantilla) [Andres]
+- [x] Separar el formador tabla en una vista a parte. (va a ser una plantilla) [Andres]
 - Cambiar los dos curl a algo normal [Andres]
 
 
