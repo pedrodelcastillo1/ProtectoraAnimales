@@ -13,23 +13,28 @@ class TablaObjeto{
         $resultado .= "<tr>";
 
         //Impirmiendo el nombre de las columnas
-        $resultado .= '<td></td>';
-        $resultado .= '<td></td>';
-        foreach ($filas[0] as $key => $value) {
-            $resultado .= '<td>' . $key . '</td>';
+        foreach ($filas[0] as $key => $value) 
+        {
+            $resultado .= '<td>' . strtoupper($key) . '</td>';
         }
 
+        $resultado .= "<td></td>";
+        $resultado .= "<td></td>";
         $resultado .= "<tr>";
 
         //imprimiendo los valores de cada columna
-        foreach ($filas as $cadaFila) {
+        foreach ($filas as $cadaFila) 
+        {
             $resultado .= "<tr>";
-            $resultado .= '<td><button type="submit" form="formularioBotones" name="borrarFila" value="' . $cadaFila->id . '">borrar Fila</button></td>'; //Se usa el id de la fila para saber que fila se debe borrar
-            $resultado .= '<td><button type="submit" form="formularioBotones" name="actualizaFila" value="' . $cadaFila->id . '">actualizar Fila</button></td>'; //Se usa el id de la fila para saber que fila se debe actualizar
-            foreach ($cadaFila as $valor) {
+
+            foreach ($cadaFila as $valor) 
+            {
                 $resultado .= '<td>' . $valor . '</td>';
             }
-
+       
+            $resultado .= '<td><button class = "botones-form1" type="submit" form="formularioBotones" name="actualizaFila" value="' . $cadaFila->id . '">Actualizar</button></td>'; //Se usa el id de la fila para saber que fila se debe actualizar
+            $resultado .= '<td><button class = "botones-form1" type="submit" form="formularioBotones" name="borrarFila" value="' . $cadaFila->id . '">Borrar</button></td>'; //Se usa el id de la fila para saber que fila se debe borrar
+            
             $resultado .= "</tr>";
         }
 

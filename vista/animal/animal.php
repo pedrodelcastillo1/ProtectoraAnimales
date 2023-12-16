@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animal</title>
+    <title>Protectora de Animales - Gestión de Animales</title>
+    <link rel="stylesheet" href="../../styles/vistasTablas.css">
+    <style>
+        body {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+    </style>
+
+    <script>
+        window.addEventListener('load', function () {
+            document.body.classList.add('loaded');
+        });
+    </script>
 </head>
 <body>
-    <form id = "formularioBotones" action="http://localhost/ProtectoraAnimales/controlador/animalControlador.php" method="GET">
-        <button name="atras" value="1">atras</button>
-        <button name="introducirAnimal" value="1">Introducir un nuevo animal</button>
-    </form>
-    <?php
-        
+    <div class="contenedor-general1">
+        <?php
         $location='http://localhost/ProtectoraAnimales/controlador/animalControlador.php?reclamoTabla="1"';//es un poco burdo poner esto hardcodeado directamente, pero es la unica forma que se me ha ocurrido
         $header=array('Content-Type: text/html; charset=utf-8');
     
@@ -31,7 +44,14 @@
         $tabla= substr($tabla,0,-1);//Quitamos el caracter 1 que indica que se ha realizado correctmanete la transacción
         echo $tabla;
         curl_close($mandarCurl);
-    ?>
-    
+        ?>
+
+        <form id="formularioBotones" action="http://localhost/ProtectoraAnimales/controlador/animalControlador.php" method="GET"></form>
+
+        <div class="botones-form">
+            <button form="formularioBotones" name="introducirAnimal" value="1">Introducir un Nuevo Animal</button><br>
+            <button form="formularioBotones" name="atras" value="1">Atrás</button>
+        </div>
+    </div>
 </body>
 </html>
