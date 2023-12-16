@@ -6,13 +6,13 @@
     <title>Adopcion</title>
 </head>
 <body>
-    <form id="formularioBotones" action="http://localhost/ProtectoraAnimales/controlador/adopcion.php" method="GET">
+    <form id="formularioBotones" action="http://localhost/ProtectoraAnimales/controlador/adopcionControlador.php" method="GET">
         <button name="atras" value="1">atras</button>
         <button name="introducirAdopcion" value="1">Introducir una nueva Adopcion</button>
     </form>
     <?php
         
-        $location='http://localhost/ProtectoraAnimales/controlador/adopcion.php?reclamoTabla="1"';//es un poco burdo poner esto hardcodeado directamente, pero es la unica forma que se me ha ocurrido
+        $location='http://localhost/ProtectoraAnimales/controlador/adopcionControlador.php?reclamoTabla="1"';//es un poco burdo poner esto hardcodeado directamente, pero es la unica forma que se me ha ocurrido
         $header=array('Content-Type: text/html; charset=utf-8');
     
         $mandarCurl=curl_init();

@@ -91,7 +91,7 @@ class ControladorUsuario
         try 
         {
             $usuario->borrar($_GET['borrarFila']);
-            header('Location: http://localhost/ProtectoraAnimales/vista/usuario/usuario.php');
+            header('Location: http://localhost/ProtectoraAnimales/vista/usuario/usuarioControlador.php');
         } 
         
             catch (Exception $e) 

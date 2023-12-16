@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="http://localhost/ProtectoraAnimales/controlador/usuario.php" method="POST">
+    <form action="http://localhost/ProtectoraAnimales/controlador/usuarioControlador.php" method="POST">
         <label for="">nombre</label>
         <input type="text" name="nombre" value="<?=$_GET['nombre']?>">
         <label for="">apellido</label>

@@ -6,7 +6,7 @@
     <title>Nuevo Animal</title>
 </head>
 <body>
-    <form action="http://localhost/ProtectoraAnimales/controlador/animal.php" method="POST">
+    <form action="http://localhost/ProtectoraAnimales/controlador/animalControlador.php" method="POST">
         <label for="">Nombre</label>
         <input type="text" name="nombre"><br>
 

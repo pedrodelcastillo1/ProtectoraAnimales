@@ -6,7 +6,7 @@
     <title>Actualizar Animal</title>
 </head>
 <body>
-    <form action="http://localhost/ProtectoraAnimales/controlador/animal.php" method="POST">
+    <form action="http://localhost/ProtectoraAnimales/controlador/animalControlador.php" method="POST">
         <label for="">Nombre</label>
         <input type="text" name="nombre" value="<?=$_GET['nombre']?>">
         <label for="">Especie</label>

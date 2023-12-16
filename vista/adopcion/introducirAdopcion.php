@@ -6,7 +6,7 @@
     <title>Nueva Adopcion</title>
 </head>
 <body>
-    <form action="http://localhost/ProtectoraAnimales/controlador/adopcion.php" method="POST">
+    <form action="http://localhost/ProtectoraAnimales/controlador/adopcionControlador.php" method="POST">
         <label for="">Id Animal</label>
         <input type="text" name="idAnimal"><br>
 
