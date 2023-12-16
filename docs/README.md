@@ -5,7 +5,7 @@
 - [x] Cuando pulses introducidir Animal redirigir a la vista de la tabla de animal [Andres]
 - [x] Separar el formador tabla en una vista a parte. (va a ser una plantilla) [Andres]
 - [x] Cambiar nombre de los ficheros de controladores [Andres]
-- [ ] Crear una clase de la extienda todos los controladores que tengan los metodos generales
+- [ ] quitar todas las rutas absolutas
 - [ ] Cambiar el nombre las funciones del controlador para que sean más legibles
 - [ ] Cambiar los dos curl a algo normal [Andres]
 
