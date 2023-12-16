@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo&display=swap');
+
+:root 
+{
+    --color-fondo-principal: blanchedalmond;
+    --color-borde: #c2812c;
+    --color-texto: #663e0b;
+    --color-texto2: #d2984e;
+    --color-boton: #bf7f2c;
+    --color-boton-hover: #f3d4ab;
+    --fuente-principal: 'Archivo';
+}
+
+body 
+{
+    background-color: var(--color-fondo-principal);
+    font-family: var(--fuente-principal);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    font-family: var(--fuente-principal);
+}
+
+.contenedor-general1 
+{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+
+.contenedor-imagen 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-boton);
+    padding: 20px;
+}
+
+img 
+{
+    max-width: 100%;
+    height: auto;
+}
+
+form 
+{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+label 
+{
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--color-texto);
+}
+
+input 
+{
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 3px solid var(--color-borde);
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--color-texto);
+    transition: border-color 0.3s;
+}
+
+input:focus 
+{
+    outline: none;
+    border-color: var(--color-boton);
+}
+
+button 
+{
+    background-color: var(--color-boton);
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    font-family: var(--fuente-principal);
+}
+
+button:hover 
+{
+    background-color: var(--color-texto);
+}
+
+.contenedor-general table 
+{
+    width: 60%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.contenedor-general th, .contenedor-general td
+{
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-boton);
+}
+
+.contenedor-general th 
+{
+    background-color: var(--color-boton);
+    color: #fff;
+}
+
+.contenedor-general tr:hover 
+{
+    background-color: var(--color-boton-hover);
+    transition: background-color 0.3s;
+}
+
+table 
+{
+    width: 75%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    background-color: var(--color-boton-hover);
+
+    transform: scale(1.2);
+    transform-origin: center;
+}
+
+th, td 
+{
+    padding: 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--color-boton);
+    border-radius: 10px;
+}
+
+th 
+{
+    background-color: var(--color-boton);
+    color: #fff;
+}
+
+tr:hover
+{
+    background-color: var(--color-texto2);
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.botones-form
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
