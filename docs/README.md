@@ -11,7 +11,7 @@
 - [ ] Quitar todas las rutas absolutas [Christian]
 - [ ] Gestion de errores [Christian]
 - [ ] Unificar controlador, automatizado. [Christian]
-- [ ] Crear y actualizar automatizados en el Crud [Christian]
+- [x] Crear y actualizar automatizados en el Crud [Christian]
  
 
 
