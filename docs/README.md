@@ -8,7 +8,7 @@
 - [ ] quitar todas las rutas absolutas
 - [ ] Cambiar el nombre las funciones del controlador para que sean más legibles
 - [ ] Cambiar los dos curl a algo normal(al hacer esto nos obliga a no poder usar header) [Andres]
-
+- [ ] Gestion de errores
 
 - [ ] Unificar controlador, automatizado. [Christian]
 - [ ] Crear y actualizar automatizados en el Crud [Christian]
