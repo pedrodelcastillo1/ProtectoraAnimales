@@ -91,7 +91,7 @@ class ControladorUsuario
         try 
         {
             $usuario->borrar($_GET['borrarFila']);
-            header('Location: http://localhost/ProtectoraAnimales/vista/usuario/usuario.php');
+            // header('Location: http://localhost/ProtectoraAnimales/vista/usuario/usuario.php');
         } 
         
             catch (Exception $e) 
@@ -101,37 +101,3 @@ class ControladorUsuario
     }
 }
 
-if (isset($_GET['reclamoTabla'])) {
-
-    ControladorUsuario::generarTabla();
-}
-
-if (isset($_GET['atras'])) 
-{
-    ControladorUsuario::retrocederAPaginaPrincipal();
-}
-
-if (isset($_GET['introducirUsuario'])) 
-{
-    ControladorUsuario::introducirUsuario();
-}
-
-if (isset($_POST['botonInsertarPulsado'])) 
-{
-    ControladorUsuario::insertarUsuario();
-}
-
-if (isset($_GET['actualizaFila'])) 
-{
-    ControladorUsuario::mostrarVistaActualizarUsuario();
-}
-
-if (isset($_POST['id'])) 
-{
-    ControladorUsuario::actualizarUsuario();
-}
-
-if (isset($_GET['borrarFila'])) 
-{
-    ControladorUsuario::borrarFila();
-}

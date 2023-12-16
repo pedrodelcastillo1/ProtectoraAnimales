@@ -34,7 +34,7 @@ class TablaObjeto{
         }
 
         $resultado .= '</table>';
-        return $resultado;
+        echo $resultado;
     }
 }
 ?>
