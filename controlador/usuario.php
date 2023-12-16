@@ -1,12 +1,16 @@
 <?php
 
 include_once '../modelo/Usuario.php';
-
+include_once '../vista/tablaDeCadaObjeto.php';
 class ControladorUsuario
 {
+    
+    //Creador de tabla html para todas las clases (Adopcion,Animal,Usuario)
     public static function generarTabla()
     {
-        echo self::formadorTablaHTML(); // Se manda a la vista que pide la tabla usuario
+        $tablaGenerar=new TablaObjeto(new Usuario()); // Se manda a la vista que pide la tabla usuario
+        echo $tablaGenerar->imprimirTabla();
+        
     }
 
     public static function retrocederAPaginaPrincipal()
@@ -45,50 +49,6 @@ class ControladorUsuario
     }
 
 
-    //Creador de tabla html para todas las clases (Adopcion,Animal,Usuario)
-    private static function formadorTablaHTML()
-    {
-        $crud = new Usuario("", "", "", "", "", ""); //es necesario crear un usuario para usar la funcion obtenerTodos
-
-        $filas = $crud -> obtieneTodos();
-        $resultado = "";
-        $resultado .= '<table>';
-        $resultado .= "<tr>";
-
-        //Impirmiendo el nombre de las columnas
-        $resultado .= '<td></td>';
-        $resultado .= '<td></td>';
-
-        foreach ($filas[0] as $key => $value) 
-        {
-            $resultado .= '<td>' . $key . '</td>';
-        }
-
-        $resultado .= "<tr>";
-
-        //imprimiendo los valores de cada columna
-        foreach ($filas as $cadaFila) 
-        {
-            echo "<pre>";
-
-            $resultado .= "<tr>";
-            
-            $resultado .= '<td><button type="submit" form="formularioBotones" name="borrarFila" value="' . $cadaFila->id . '">borrar Fila</button></td>'; //Se usa el id de la fila para saber que fila se debe borrar
-            
-            $resultado .= '<td><button type="submit" form="formularioBotones" name="actualizaFila" value="' . $cadaFila->id . '">actualizar Fila</button></td>'; //Se usa el id de la fila para saber que fila se debe actualizar
-
-            foreach ($cadaFila as $valor) 
-            {
-                $resultado .= '<td>' . $valor . '</td>';
-            }
-
-            $resultado .= "</tr>";
-        }
-
-        $resultado .= '</table>';
-
-        echo $resultado;
-    }
 
     public static function mostrarVistaActualizarUsuario()
     {
@@ -141,8 +101,8 @@ class ControladorUsuario
     }
 }
 
-if (isset($_GET['reclamoTabla'])) 
-{
+if (isset($_GET['reclamoTabla'])) {
+
     ControladorUsuario::generarTabla();
 }
 
