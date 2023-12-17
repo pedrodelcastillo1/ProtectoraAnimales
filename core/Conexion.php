@@ -1,5 +1,5 @@
 <?php 
-require_once 'const.php';
+require_once 'Const.php';
 
 class Conexion 
 {

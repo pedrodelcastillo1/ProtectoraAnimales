@@ -1,25 +1,25 @@
 <?php
 
-include_once '../modelo/Animal.php';
-include_once '../vista/tablaDeCadaObjeto.php';
+include_once '../Modelo/Animal.php';
+include_once '../Vista/MontadorTabla.php';
 
 class ControladorAnimal
 {
     //Creador de tabla html para todas las clases (Adopcion,Animal,Usuario)
     public static function generarTabla()
     {
-        $tablaGenerar=new TablaObjeto(new Animal()); // Se manda a la vista que pide la tabla usuario
-        echo $tablaGenerar->imprimirTabla();
+        $tablaGenerar = new TablaObjeto(new Animal()); // Se manda a la vista que pide la tabla usuario
+        echo $tablaGenerar -> imprimirTabla();
     }
 
     public static function retrocederAPaginaPrincipal()
     {
-        header('Location: http://localhost/ProtectoraAnimales'); // Cuando se pulsa el boton de ir hacia atras
+        header('Location: /ProtectoraAnimales'); // Cuando se pulsa el boton de ir hacia atras
     }
    
     public static function introducirAnimal()
     {
-        header('Location: http://localhost/ProtectoraAnimales/vista/animal/introducirAnimal.php'); // Te muestra la vista de introducir usuario
+        header('Location: /ProtectoraAnimales/Vista/Animal/Insertar_Animal.php'); // Te muestra la vista de introducir usuario
     }
    
     public static function insertarAnimal()
@@ -38,7 +38,7 @@ class ControladorAnimal
             $crudAnimal -> crear();
 
             // Redireccionar después de la inserción
-            header('Location: http://localhost/ProtectoraAnimales/vista/animal/animal.php');
+            header('Location: /ProtectoraAnimales/Vista/Animal/Mostrar_Animal.php');
         } 
         
             catch (Exception $e) 
@@ -47,13 +47,12 @@ class ControladorAnimal
             }
     }
 
-
     public static function mostrarVistaActualizarAnimal()
     {
         //Actualizar fila
         try 
         {
-            $pathFichero='http://localhost/ProtectoraAnimales/vista/animal/actualizarFilaAnimal.php?idAnimal='. $_GET['actualizaFila'];//ActualizarFila contiene el id del usuario a modificar
+            $pathFichero='/ProtectoraAnimales/Vista/Animal/Actualizar_Animal.php?idAnimal='. $_GET['actualizaFila'];//ActualizarFila contiene el id del usuario a modificar
             $animal = new Animal();
 
             $animal = $animal -> obtieneDeId($_GET['actualizaFila']);
@@ -80,7 +79,7 @@ class ControladorAnimal
 
         echo $actualizarAnimal;
 
-        header('Location: http://localhost/ProtectoraAnimales/vista/animal/animal.php');
+        header('Location: /ProtectoraAnimales/Vista/Animal/Mostrar_Animal.php');
     }
 
     public static function borrarFila()
@@ -91,7 +90,7 @@ class ControladorAnimal
         try 
         {
             $animal -> borrar($_GET['borrarFila']);
-            header('Location: http://localhost/ProtectoraAnimales/vista/animal/animal.php');
+            header('Location: /ProtectoraAnimales/Vista/Animal/Mostrar_Animal.php');
         } 
         
             catch (Exception $e) 

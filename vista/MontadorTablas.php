@@ -1,13 +1,18 @@
 <?php
-class TablaObjeto{
+class TablaObjeto
+{
     private $crud;
-    function __construct($objeto){
-        $this->crud = $objeto; //es necesario crear un usuario para usar la funcion obtenerTodos
+
+    function __construct($objeto)
+    {
+        // Creamos una instancia, para poder usar la función "obtieneTodos()"
+        $this -> crud = $objeto;
     }
 
-    function imprimirTabla(){
-
-        $filas = $this->crud->obtieneTodos();
+    function imprimirTabla()
+    {
+        $filas = $this -> crud -> obtieneTodos();
+        
         $resultado = "";
         $resultado .= '<table>';
         $resultado .= "<tr>";
@@ -20,6 +25,7 @@ class TablaObjeto{
 
         $resultado .= "<td></td>";
         $resultado .= "<td></td>";
+
         $resultado .= "<tr>";
 
         //imprimiendo los valores de cada columna
@@ -32,13 +38,14 @@ class TablaObjeto{
                 $resultado .= '<td>' . $valor . '</td>';
             }
        
-            $resultado .= '<td><button class = "botones-form1" type="submit" form="formularioBotones" name="actualizaFila" value="' . $cadaFila->id . '">Actualizar</button></td>'; //Se usa el id de la fila para saber que fila se debe actualizar
-            $resultado .= '<td><button class = "botones-form1" type="submit" form="formularioBotones" name="borrarFila" value="' . $cadaFila->id . '">Borrar</button></td>'; //Se usa el id de la fila para saber que fila se debe borrar
+            $resultado .= '<td><button class = "botones-form1" type="submit" form="formularioBotones" name="actualizaFila" value="' . $cadaFila -> id . '">Actualizar</button></td>'; //Se usa el id de la fila para saber que fila se debe actualizar
+            $resultado .= '<td><button class = "botones-form1" type="submit" form="formularioBotones" name="borrarFila" value="' . $cadaFila -> id . '">Borrar</button></td>'; //Se usa el id de la fila para saber que fila se debe borrar
             
             $resultado .= "</tr>";
         }
 
         $resultado .= '</table>';
+
         return $resultado;
     }
 }
