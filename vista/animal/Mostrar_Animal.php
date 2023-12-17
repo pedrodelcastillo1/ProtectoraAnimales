@@ -4,29 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protectora de Animales - Gestión de Animales</title>
-    <link rel="stylesheet" href="../../styles/vistasTablas.css">
-    <style>
-        body {
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
+    <link rel="stylesheet" href="../../styles/Vistas_Tablas.css">
+    
+    <!-- Transiciones entre páginas -->
+    <style> body {opacity: 0; transition: opacity 1s ease;} body.loaded {opacity: 1;}</style>
+    <script> window.addEventListener('load', function () {document.body.classList.add('loaded');}); </script>
 
-        body.loaded {
-            opacity: 1;
-        }
-    </style>
-
-    <script>
-        window.addEventListener('load', function () {
-            document.body.classList.add('loaded');
-        });
-    </script>
 </head>
 <body>
     <div class="contenedor-general1">
+    <h1 class = "titulo">Tabla Animales</h1>
         <?php
-        $location='http://localhost/ProtectoraAnimales/controlador/animalControlador.php?reclamoTabla="1"';//es un poco burdo poner esto hardcodeado directamente, pero es la unica forma que se me ha ocurrido
-        $header=array('Content-Type: text/html; charset=utf-8');
+        $location = 'https://localhost/ProtectoraAnimales/Controlador/Controlador_Animal.php?reclamoTabla="1"';//es un poco burdo poner esto hardcodeado directamente, pero es la unica forma que se me ha ocurrido
+        $header = array('Content-Type: text/html; charset=utf-8');
     
         $mandarCurl=curl_init();
         
@@ -46,7 +36,7 @@
         curl_close($mandarCurl);
         ?>
 
-        <form id="formularioBotones" action="http://localhost/ProtectoraAnimales/controlador/animalControlador.php" method="GET"></form>
+        <form id="formularioBotones" action="/ProtectoraAnimales/Controlador/Controlador_Animal.php" method="GET"></form>
 
         <div class="botones-form">
             <button form="formularioBotones" name="introducirAnimal" value="1">Introducir un Nuevo Animal</button><br>

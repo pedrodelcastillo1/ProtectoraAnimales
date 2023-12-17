@@ -13,15 +13,11 @@
 - [ ] Unificar controlador, automatizado. [Christian]
 - [x] Crear y actualizar automatizados en el Crud [Christian]
  
-
-
-
 ## Si nos da la vida:
 
     - Cambiar a include todos los headers
 	    Pasos: Generar un index con gestor de ruta, para que llame de forma dinamica a los controladores usuario, animal y adopcion 
 	      (esto va a cambiar casi todo el codigo)
-
 
 # Protectora de Animales
 
