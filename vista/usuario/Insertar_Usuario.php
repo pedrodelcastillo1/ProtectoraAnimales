@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introducir Nuevo Usuario</title>
-    <link rel = "stylesheet" href = "../../styles/form.css">
+    <link rel = "stylesheet" href = "../../styles/Vistas_Tablas_Formularios.css">
 </head>
 <body>
     <h1 class = "titulo">Introducir Nuevo Usuario</h1>
@@ -14,7 +14,7 @@
         </div>
         
         <div class = "contenedor-form">
-            <form action="http://localhost/ProtectoraAnimales/controlador/usuarioControlador.php" method="POST">
+            <form action="/ProtectoraAnimales/Controlador/Controlador_Usuario.php" method="POST">
                 <label for="">Nombre</label>
                 <input type="text" name="nombre">
         

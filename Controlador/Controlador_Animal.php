@@ -1,44 +1,48 @@
 <?php
 
-include_once '../modelo/Animal.php';
-include_once '../vista/tablaDeCadaObjeto.php';
+include_once '../Modelo/Animal.php';
+include_once '../Vista/MontadorTablas.php';
 
 class ControladorAnimal
 {
-    //Creador de tabla html para todas las clases (Adopcion,Animal,Usuario)
+    // Generador de la tabla correspondiente, que se muestra en la Vista
     public static function generarTabla()
     {
-        $tablaGenerar=new TablaObjeto(new Animal()); // Se manda a la vista que pide la tabla usuario
-        echo $tablaGenerar->imprimirTabla();
+        $tablaGenerar = new TablaObjeto(new Animal());
+        echo $tablaGenerar -> imprimirTabla();
     }
 
+    // Botón de retroceder, que redigire a la página principal
     public static function retrocederAPaginaPrincipal()
     {
-        header('Location: http://localhost/ProtectoraAnimales'); // Cuando se pulsa el boton de ir hacia atras
+        header('Location: /ProtectoraAnimales');
     }
    
-    public static function introducirAnimal()
-    {
-        header('Location: http://localhost/ProtectoraAnimales/vista/animal/introducirAnimal.php'); // Te muestra la vista de introducir usuario
-    }
-   
+    // Redirección a la Vista del formulario para introducir un animal
     public static function insertarAnimal()
+    {
+        header('Location: /ProtectoraAnimales/Vista/Animal/Insertar_Animal.php');
+    }
+   
+    // Crear un nuevo animal
+    public static function crearAnimal()
     {
         try 
         {
+            // Si en el formulario hay parámetros vacíos
             if ($_POST["nombre"] === "" || $_POST["especie"] === "" || $_POST["raza"] === "" || $_POST["genero"] === "" || $_POST["color"] === "" || $_POST["edad"] === "") 
             {
                 throw new Exception("No puede haber nada vacío", 1);
             }
 
-            // Crear una instancia de la clase Crud para operar en la tabla de usuarios
+            // Crear una instancia de la clase Crud para operar en la tabla de animales
             $crudAnimal = new Crud('animal');
 
-            // Llamar al método crear de la clase Crud para insertar el usuario
+            // Llamar al método crear de la clase Crud para insertar el animal
             $crudAnimal -> crear();
 
             // Redireccionar después de la inserción
-            header('Location: http://localhost/ProtectoraAnimales/vista/animal/animal.php');
+            header('Location: /ProtectoraAnimales/Vista/Animal/Mostrar_Animal.php');
         } 
         
             catch (Exception $e) 
@@ -47,13 +51,14 @@ class ControladorAnimal
             }
     }
 
-
+    // Muestra la vista de los animales actualizada
     public static function mostrarVistaActualizarAnimal()
     {
-        //Actualizar fila
         try 
         {
-            $pathFichero='http://localhost/ProtectoraAnimales/vista/animal/actualizarFilaAnimal.php?idAnimal='. $_GET['actualizaFila'];//ActualizarFila contiene el id del usuario a modificar
+            //ActualizarFila contiene el ID del animal a modificar
+            $pathFichero='/ProtectoraAnimales/Vista/Animal/Actualizar_Animal.php?idAnimal='. $_GET['actualizaFila'];
+            
             $animal = new Animal();
 
             $animal = $animal -> obtieneDeId($_GET['actualizaFila']);
@@ -72,17 +77,17 @@ class ControladorAnimal
             }
     }
 
+    // Actualiza el animal correspondiente
     public static function actualizarAnimal()
     {
         $actualizarAnimal = new Animal($_POST['nombre'], $_POST['especie'], $_POST['raza'], $_POST['genero'], $_POST['color'], $_POST['edad']);
 
         $actualizarAnimal -> actualizar();
 
-        echo $actualizarAnimal;
-
-        header('Location: http://localhost/ProtectoraAnimales/vista/animal/animal.php');
+        header('Location: /ProtectoraAnimales/Vista/Animal/Mostrar_Animal.php');
     }
 
+    // Borra el animal de la fila correspondiente
     public static function borrarFila()
     {
         //Borrar fila especifica
@@ -91,7 +96,7 @@ class ControladorAnimal
         try 
         {
             $animal -> borrar($_GET['borrarFila']);
-            header('Location: http://localhost/ProtectoraAnimales/vista/animal/animal.php');
+            header('Location: /ProtectoraAnimales/Vista/Animal/Mostrar_Animal.php');
         } 
         
             catch (Exception $e) 
@@ -101,6 +106,7 @@ class ControladorAnimal
     }
 }
 
+// Llamadas correspondientes a los botones pulsados / requeridos en el momento
 if (isset($_GET['reclamoTabla'])) 
 {
     ControladorAnimal::generarTabla();
@@ -111,14 +117,14 @@ if (isset($_GET['atras']))
     ControladorAnimal::retrocederAPaginaPrincipal();
 }
 
-if (isset($_GET['introducirAnimal'])) 
+if (isset($_GET['insertarAnimal'])) 
 {
-    ControladorAnimal::introducirAnimal();
+    ControladorAnimal::insertarAnimal();
 }
 
 if (isset($_POST['botonInsertarPulsado'])) 
 {
-    ControladorAnimal::insertarAnimal();
+    ControladorAnimal::crearAnimal();
 }
 
 if (isset($_GET['actualizaFila'])) 

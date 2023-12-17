@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar Adopcion</title>
-    <link rel = "stylesheet" href = "../../styles/form.css">
+    <link rel = "stylesheet" href = "../../styles/Vistas_Tablas_Formularios.css">
 </head>
 <body>
     <h1 class = "titulo">Actualizar Adopción</h1>
@@ -14,7 +14,7 @@
         </div>
         
         <div class = "contenedor-form">
-            <form action="http://localhost/ProtectoraAnimales/controlador/adopcionControlador.php" method="POST">
+            <form action="/ProtectoraAnimales/Controlador/Controlador_Adopcion.php" method="POST">
                 <label for="">ID_Animal</label>
                 <input type="text" name="idAnimal" value="<?=$_GET['idAnimal']?>">
 
