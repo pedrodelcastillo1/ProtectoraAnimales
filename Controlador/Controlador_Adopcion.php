@@ -1,94 +1,141 @@
 <?php
 
-include_once '../modelo/Adopcion.php';
-include_once '../vista/tablaDeCadaObjeto.php';
+include_once '../Modelo/Adopcion.php';
+include_once '../Vista/MontadorTablas.php';
+
 class ControladorAdopcion
 {
-    //Creador de tabla html para todas las clases (Adopcion,Animal,Usuario)
+    // Generador de la tabla correspondiente, que se muestra en la Vista
     public static function generarTabla()
     {
-        $tablaGenerar=new TablaObjeto(new Adopcion()); // Se manda a la vista que pide la tabla usuario
-        echo $tablaGenerar->imprimirTabla();
+        $tablaGenerar = new TablaObjeto(new Adopcion());
+        echo $tablaGenerar -> imprimirTabla();
     }
-    //Creador de tabla html para todas las clases (Adopcion,Animal,Usuario)
+
+    // Botón de retroceder, que redigire a la página principal 
     public static function retrocederAPaginaPrincipal()
     {
-        header('Location: http://localhost/ProtectoraAnimales'); // Cuando se pulsa el boton de ir hacia atras
+        header('Location: /ProtectoraAnimales');
     }
-    public static function introducirAdopcion()
-    {
-        header('Location: http://localhost/ProtectoraAnimales/vista/adopcion/introducirAdopcion.php'); // Te muestra la vista de introducir usuario
-    }
+
+    // Redirección a la Vista del formulario para introducir una adopción 
     public static function insertarAdopcion()
     {
-        //Si no se cumple ninguno de esto significa que estas en la vista introducirUsuario.php
-        try {
-            if ($_POST["idAnimal"] === "" || $_POST["idUsuario"] === "" || $_POST["fecha"] === "" || $_POST["razon"] === "") {
+        header('Location: /ProtectoraAnimales/Vista/Adopcion/Insertar_Adopcion.php');
+    }
+
+    // Crear una nueva adopción
+    public static function crearAdopcion()
+    {
+        try 
+        {
+            // Si en el formulario hay parámetros vacíos
+            if ($_POST["idAnimal"] === "" || $_POST["idUsuario"] === "" || $_POST["fecha"] === "" || $_POST["razon"] === "") 
+            {
                 throw new Exception("No puede haber nada vacio", 1);
             }
-            $insertarAdopcion = new Adopcion("", $_POST["idAnimal"], $_POST["idUsuario"], $_POST["fecha"], $_POST["razon"]);
-            $insertarAdopcion->crear();
-            header('Location: http://localhost/ProtectoraAnimales/vista/adopcion/adopcion.php');
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
+
+            // Se crea el objeto y se llama a la función correspondiente para crear
+            $crearAdopcion = new Adopcion("", $_POST["idAnimal"], $_POST["idUsuario"], $_POST["fecha"], $_POST["razon"]);
+            $crearAdopcion -> crear();
+
+            // Al crearse e insertarse el objeto correctamente, se redirije automáticamente a la Vista con todas las tablas 
+            header('Location: /ProtectoraAnimales/Vista/Adopcion/Mostrar_Adopcion.php');
+        } 
+
+            catch (Exception $e) 
+            {
+                echo $e -> getMessage();
+            }
     }
+
+    // Muestra la vista de las adopciones actualizada
     public static function mostrarVistaActualizarAdopcion()
     {
-        //Actualizar fila
-        try {
-            $pathFichero = 'http://localhost/ProtectoraAnimales/vista/adopcion/actualizarFilaAdopcion.php?idUsuario=' . $_GET['actualizaFila']; //ActualizarFila contiene el id del usuario a modificar
+        try 
+        {
+            //ActualizarFila contiene el ID de la adopcion a modificar
+            $pathFichero = '/ProtectoraAnimales/Vista/Adopcion/Actualizar_Adopcion.php?idUsuario=' . $_GET['actualizaFila']; 
+           
             $adopcion = new Adopcion();
-            $adopcion = $adopcion->obtieneDeId($_GET['actualizaFila']);
-            foreach ($adopcion[0] as $key => $value) {
+
+            $adopcion = $adopcion -> obtieneDeId($_GET['actualizaFila']);
+            
+            foreach ($adopcion[0] as $key => $value) 
+            {
                 $pathFichero .= "&" . $key . "=" . $value;
             }
+
             header('Location:' . $pathFichero);
-        } catch (Exception $e) {
-            echo $e;
-        }
+        } 
+        
+            catch (Exception $e) 
+            {
+                echo $e;
+            }
     }
+
+    // Crea las adopciones
     public static function actualizarAdopcion()
     {
         $actualizarAdopcion = new Adopcion($_POST['id'], $_POST['idAnimal'], $_POST['idUsuario'], $_POST['fecha'], $_POST['razon']);
-        $actualizarAdopcion->actualizar();
-        header('Location: http://localhost/ProtectoraAnimales/vista/adopcion/adopcion.php');
+        
+        $actualizarAdopcion -> actualizar();
+        
+        header('Location: /ProtectoraAnimales/Vista/Adopcion/Mostrar_Adopcion.php');
     }
 
+    // Borra la adopcion de la fila correspondiente
     public static function borrarFila()
     {
         //Borrar fila especifica
         $adopcion = new Adopcion('', "", "", "", "");
-        try {
-            $adopcion->borrar($_GET['borrarFila']);
-            header('Location: http://localhost/ProtectoraAnimales/vista/adopcion/adopcion.php');
-        } catch (Exception $e) {
-            echo $e;
-        }
+        
+        try 
+        {
+            $adopcion -> borrar($_GET['borrarFila']);
+            header('Location: /ProtectoraAnimales/Vista/Adopcion/Mostrar_Adopcion.php');
+        } 
+        
+            catch (Exception $e) 
+            {
+                echo $e;
+            }
     }
 }
 
-if (isset($_GET['reclamoTabla'])) {
+// Llamadas correspondientes a los botones pulsados / requeridos en el momento
+if (isset($_GET['reclamoTabla']))
+{
     ControladorAdopcion::generarTabla();
 }
-if (isset($_GET['atras'])) {
 
+if (isset($_GET['atras'])) 
+{
     ControladorAdopcion::retrocederAPaginaPrincipal();
 }
-if (isset($_GET['introducirAdopcion'])) {
-    ControladorAdopcion::introducirAdopcion();
-}
-if (isset($_POST['botonInsertarPulsado'])) {
 
+if (isset($_GET['insertarAdopcion'])) 
+{
     ControladorAdopcion::insertarAdopcion();
 }
-if (isset($_GET['actualizaFila'])) {
+
+if (isset($_POST['botonInsertarPulsado'])) 
+{
+    ControladorAdopcion::crearAdopcion();
+}
+
+if (isset($_GET['actualizaFila'])) 
+{
     ControladorAdopcion::mostrarVistaActualizarAdopcion();
 }
-if (isset($_POST['id'])) {
 
+if (isset($_POST['id'])) 
+{
     ControladorAdopcion::actualizarAdopcion();
 }
-if (isset($_GET['borrarFila'])) {
+
+if (isset($_GET['borrarFila']))
+{
     ControladorAdopcion::borrarFila();
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nueva Adopcion</title>
-    <link rel = "stylesheet" href = "../../styles/form.css">
+    <link rel = "stylesheet" href = "../../styles/Vistas_Tablas_Formularios.css">
 </head>
 <body>
     <h1 class = "titulo">Introducir Nueva Adopcion</h1>
@@ -14,12 +14,12 @@
         </div>
         
         <div class = "contenedor-form">
-            <form action="http://localhost/ProtectoraAnimales/controlador/adopcionControlador.php" method="POST">
-                <label for="">Id Animal</label>
-                <input type="text" name="idAnimal"><br>
+            <form action="/ProtectoraAnimales/Controlador/Controlador_Adopcion.php" method="POST">
+                <label for="">ID Animal</label>
+                <input type="number" name="idAnimal"><br>
 
-                <label for="">Id Usuario</label>
-                <input type="text" name="idUsuario"><br>
+                <label for="">ID Usuario</label>
+                <input type="number" name="idUsuario"><br>
 
                 <label for="">Fecha</label>
                 <input type="date" name="fecha"><br>

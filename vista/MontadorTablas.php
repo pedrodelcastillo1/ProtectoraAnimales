@@ -13,40 +13,47 @@ class TablaObjeto
     {
         $filas = $this -> crud -> obtieneTodos();
         
-        $resultado = "";
-        $resultado .= '<table>';
-        $resultado .= "<tr>";
-
-        //Impirmiendo el nombre de las columnas
-        foreach ($filas[0] as $key => $value) 
+        // Si no hay datos en la tabla
+        if (empty($filas))
         {
-            $resultado .= '<td>' . strtoupper($key) . '</td>';
+            return "<p>No hay datos para mostrar en la tabla.</p>";
         }
-
-        $resultado .= "<td></td>";
-        $resultado .= "<td></td>";
-
-        $resultado .= "<tr>";
-
-        //imprimiendo los valores de cada columna
-        foreach ($filas as $cadaFila) 
-        {
-            $resultado .= "<tr>";
-
-            foreach ($cadaFila as $valor) 
+            // Se monta la tabla y se muestra
+            else 
             {
-                $resultado .= '<td>' . $valor . '</td>';
-            }
-       
-            $resultado .= '<td><button class = "botones-form1" type="submit" form="formularioBotones" name="actualizaFila" value="' . $cadaFila -> id . '">Actualizar</button></td>'; //Se usa el id de la fila para saber que fila se debe actualizar
-            $resultado .= '<td><button class = "botones-form1" type="submit" form="formularioBotones" name="borrarFila" value="' . $cadaFila -> id . '">Borrar</button></td>'; //Se usa el id de la fila para saber que fila se debe borrar
+                $resultado = "";
+                $resultado .= '<table>';
+                $resultado .= "<tr>";
+
+                foreach ($filas[0] as $key => $value) 
+                {
+                    $resultado .= '<td>' . strtoupper($key) . '</td>';
+                }
+
+                $resultado .= "<td></td>";
+                $resultado .= "<td></td>";
+
+                $resultado .= "<tr>";
+
+                foreach ($filas as $cadaFila) 
+                {
+                    $resultado .= "<tr>";
+
+                    foreach ($cadaFila as $valor) 
+                    {
+                        $resultado .= '<td>' . $valor . '</td>';
+                    }
             
-            $resultado .= "</tr>";
-        }
+                    $resultado .= '<td><button class = "botones-form1" type="submit" form="formularioBotones" name="actualizaFila" value="' . $cadaFila -> id . '">Actualizar</button></td>'; //Se usa el id de la fila para saber que fila se debe actualizar
+                    $resultado .= '<td><button class = "botones-form1" type="submit" form="formularioBotones" name="borrarFila" value="' . $cadaFila -> id . '">Borrar</button></td>'; //Se usa el id de la fila para saber que fila se debe borrar
+                    
+                    $resultado .= "</tr>";
+                }
 
-        $resultado .= '</table>';
+                $resultado .= '</table>';
 
-        return $resultado;
+                return $resultado;
+            }
     }
 }
 ?>

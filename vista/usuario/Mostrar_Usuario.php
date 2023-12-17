@@ -15,21 +15,35 @@
     <div class="contenedor-general1">
     <h1 class = "titulo">Tabla Usuarios</h1>
         <?php
+
+            // Se define la URL a la que se le enviará la solicitud POST
             $location = 'https://localhost/ProtectoraAnimales/Controlador/Controlador_Usuario.php?reclamoTabla="1"';
+
+            // Se definen los encabezados HTTP que se incluirán en la solicitud POST
             $header = array('Content-Type: text/html; charset=utf-8');
 
+            // Se crea una nueva sesión cURL (Client URL)
             $mandarCurl = curl_init();
 
-            curl_setopt($mandarCurl, CURLOPT_URL, $location);
-            curl_setopt($mandarCurl, CURLOPT_HTTPHEADER, $header);
-            curl_setopt($mandarCurl, CURLOPT_POST, true);
-            curl_setopt($mandarCurl, CURLOPT_NOBODY, false);
-            curl_setopt($mandarCurl, CURLOPT_SSL_VERIFYPEER, false);
+            // Establecemos algunos parámetros de la sesión 
+            curl_setopt($mandarCurl,CURLOPT_URL,$location); // URL de la solicitud
+            curl_setopt($mandarCurl,CURLOPT_HTTPHEADER,$header); // Encabezados HTTP
+            curl_setopt($mandarCurl,CURLOPT_POST,true); // Habilitar solicitud POST
+            curl_setopt($mandarCurl,CURLOPT_NOBODY,false); // Incluye el cuerpo de la respuesta, en la salida 
+            curl_setopt($mandarCurl,CURLOPT_SSL_VERIFYPEER,false); // Deshabilitar la verificación del certificado SSL
 
-            $tabla = curl_exec($mandarCurl);
-            $tabla = substr($tabla, 0, -1);
+            // Realiza la solicitud cURL y almacena la respuesta en la variable $tabla
+            $tabla= curl_exec($mandarCurl);
+
+            // Elimina el último carácter de la respuesta (puede ser un carácter de salto de linea o nueva linea)
+            $tabla= substr($tabla,0,-1);
+
+            // Imprime la tabla
             echo $tabla;
+
+            // Cierra la sesión cURL
             curl_close($mandarCurl);
+
         ?>
         <form id="formularioBotones" action="/ProtectoraAnimales/Controlador/Controlador_Usuario.php" method="GET"></form>
 

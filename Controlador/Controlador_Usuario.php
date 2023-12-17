@@ -5,27 +5,31 @@ include_once '../Vista/MontadorTablas.php';
 
 class ControladorUsuario
 {
-    //Creador de tabla html para todas las clases (Adopcion,Animal,Usuario)
+    // Generador de la tabla correspondiente, que se muestra en la Vista
     public static function generarTabla()
     {
-        $tablaGenerar = new TablaObjeto(new Usuario()); // Se manda a la vista que pide la tabla usuario
+        $tablaGenerar = new TablaObjeto(new Usuario());
         echo $tablaGenerar -> imprimirTabla();
     }
 
+    // Botón de retroceder, que redigire a la página principal
     public static function retrocederAPaginaPrincipal()
     {
-        header('Location: /ProtectoraAnimales'); // Cuando se pulsa el boton de ir hacia atras
+        header('Location: /ProtectoraAnimales');
     }
    
+    // Redirección a la Vista del formulario para introducir un usuario
     public static function introducirUsuario()
     {
-        header('Location: /ProtectoraAnimales/Vista/Usuario/Insertar_Usuario.php'); // Te muestra la vista de introducir usuario
+        header('Location: /ProtectoraAnimales/Vista/Usuario/Insertar_Usuario.php'); 
     }
    
+    // Crear un nuevo usuario
     public static function insertarUsuario()
     {
         try 
         {
+            // Si en el formulario hay parámetros vacíos
             if ($_POST["nombre"] === "" || $_POST["apellido"] === "" || $_POST["sexo"] === "" || $_POST["direccion"] === "" || $_POST["telefono"] === "") 
             {
                 throw new Exception("No puede haber nada vacío", 1);
@@ -47,15 +51,17 @@ class ControladorUsuario
             }
     }
 
+    // Muestra la vista de los animales actualizada
     public static function mostrarVistaActualizarUsuario()
     {
-        //Actualizar fila
         try 
         {
-            $pathFichero ='/ProtectoraAnimales/Vista/Usuario/Actualizar_Usuario.php?idUsuario='. $_GET['actualizaFila'];//ActualizarFila contiene el id del usuario a modificar
+            //ActualizarFila contiene el ID del animal a modificar
+            $pathFichero ='/ProtectoraAnimales/Vista/Usuario/Actualizar_Usuario.php?idUsuario='. $_GET['actualizaFila'];
+            
             $usuario = new Usuario();
 
-            $usuario = $usuario->obtieneDeId($_GET['actualizaFila']);
+            $usuario = $usuario -> obtieneDeId($_GET['actualizaFila']);
 
             foreach ($usuario[0] as $key => $value) 
             {
@@ -71,6 +77,7 @@ class ControladorUsuario
             }
     }
 
+    // Actualiza el usuario correspondiente
     public static function actualizarUsuario()
     {
         $actualizarUsuario = new Usuario($_POST['id'], $_POST['nombre'], $_POST['apellido'], $_POST['sexo'], $_POST['direccion'], $_POST['telefono']);
@@ -80,6 +87,7 @@ class ControladorUsuario
         header('Location: /ProtectoraAnimales/Vista/Usuario/Mostrar_Usuario.php');
     }
 
+    // Borra el animal de la fila correspondiente
     public static function borrarFila()
     {
         //Borrar fila especifica
@@ -98,8 +106,9 @@ class ControladorUsuario
     }
 }
 
-if (isset($_GET['reclamoTabla'])) {
-
+// Llamadas correspondientes a los botones pulsados / requeridos en el momento
+if (isset($_GET['reclamoTabla'])) 
+{
     ControladorUsuario::generarTabla();
 }
 

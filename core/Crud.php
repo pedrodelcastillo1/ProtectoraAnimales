@@ -107,6 +107,7 @@ class Crud extends Conexion
             }
     }
 
+    // Recoge toda la información de la tabla a la que hace referencia
     private function obtenerColumnasTabla()
     {
         $consulta = "DESCRIBE " . $this -> tabla;
@@ -161,13 +162,11 @@ class Crud extends Conexion
 
             // Ejecutar la inserción
             $insertarDatos -> execute();
-            
-            echo "Registro creado correctamente.";
         } 
             
             catch (PDOException $e) 
             {
-                throw new Exception("Error al crear el registro: " . $e -> getMessage());
+                echo "Error al crear el registro: Violación de Integridad, no existen los datos en la Base de Datos";
             }
     }
 
@@ -175,8 +174,6 @@ class Crud extends Conexion
     {
         try 
         {
-            echo "<pre>";
-            print_r($_POST);
             $columnasUpdate = $_POST;
 
             // Validar que hay datos en el formulario
@@ -204,8 +201,6 @@ class Crud extends Conexion
 
             $sqlFinal = $sqlUpdate . $sqlWhere;
 
-            print_r($sqlFinal);
-
             // Preparar la consulta
             $actualizarDatos = $this -> conexion -> prepare($sqlFinal);
            
@@ -213,9 +208,10 @@ class Crud extends Conexion
             $actualizarDatos -> execute();
         } 
 
-            catch (PDOException $e) 
+            catch (Exception $e) 
             {
-                throw new Exception("Error al actualizar el registro: " . $e->getMessage());
+                echo "Error al actualizar el registro: No existen los datos introducidos en la BBDD.";
+                exit();
             }
     }
 }
