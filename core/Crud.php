@@ -121,7 +121,7 @@ class Crud extends Conexion
         try 
         {
             // Validar que hay datos en el formulario
-            if (empty($_POST)) 
+            if (empty($_GET)) 
             {
                 throw new Exception("No hay datos para insertar", 1);
             }
@@ -130,8 +130,7 @@ class Crud extends Conexion
             $columnasValidas = $this -> obtenerColumnasTabla();
 
             // Filtrar las claves del array $_POST para incluir solo las columnas válidas
-            $columnasPost = array_intersect(array_keys($_POST), $columnasValidas);
-
+            $columnasPost = array_intersect(array_keys($_GET), $columnasValidas);
             // Excluir el campo 'botonInsertarPulsado' si está presente
             $columnasPost = array_diff($columnasPost, ['botonInsertarPulsado']);
 
@@ -156,13 +155,12 @@ class Crud extends Conexion
             // Asignar valores a los parámetros desde $_POST
             foreach ($columnasPost as $columna) 
             {
-                $insertarDatos -> bindParam(":$columna", $_POST[$columna]);
+                $insertarDatos -> bindParam(":$columna", $_GET[$columna]);
             }
 
             // Ejecutar la inserción
             $insertarDatos -> execute();
             
-            echo "Registro creado correctamente.";
         } 
             
             catch (PDOException $e) 
@@ -175,12 +173,10 @@ class Crud extends Conexion
     {
         try 
         {
-            echo "<pre>";
-            print_r($_POST);
-            $columnasUpdate = $_POST;
+            $columnasUpdate = $_GET;
 
             // Validar que hay datos en el formulario
-            if (empty($_POST)) 
+            if (empty($_GET)) 
             {
                 throw new Exception("No hay datos para actualizar", 1);
             }
@@ -190,7 +186,7 @@ class Crud extends Conexion
 
             // Excluir el campo 'botonInsertarPulsado' si está presente
             array_pop($columnasUpdate);
-
+            array_pop($columnasUpdate);
             // Construir la consulta SQL de actualización
             $sqlUpdate = "UPDATE " . $this -> tabla . " SET ";
 
@@ -200,11 +196,10 @@ class Crud extends Conexion
             }
 
             $sqlUpdate = rtrim($sqlUpdate, ", ") . " ";
-            $sqlWhere = "WHERE id = " . $_POST['id']; // Cambia 'id' por la columna que actúa como identificador único
+            $sqlWhere = "WHERE id = " . $_GET['id']; // Cambia 'id' por la columna que actúa como identificador único
 
             $sqlFinal = $sqlUpdate . $sqlWhere;
 
-            print_r($sqlFinal);
 
             // Preparar la consulta
             $actualizarDatos = $this -> conexion -> prepare($sqlFinal);
@@ -217,6 +212,20 @@ class Crud extends Conexion
             {
                 throw new Exception("Error al actualizar el registro: " . $e->getMessage());
             }
+    }
+
+    //Optiene los distintos tipos de una tabla segun la columna
+
+    function obtenerMetaDatosTabla(){
+        // COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_TYPE
+        $prepareStatement=$this->conexion->prepare("SELECT *
+        FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :nomTabla");
+
+        $prepareStatement->bindParam(":nomTabla", $tabla, PDO::PARAM_STR);
+        $prepareStatement->execute();
+        return $prepareStatement->fetchAll(PDO::FETCH_ASSOC);
+
+
     }
 }
 

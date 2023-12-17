@@ -1,25 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="http://localhost/ProtectoraAnimales/controlador/usuarioControlador.php" method="POST">
-        <label for="">nombre</label>
-        <input type="text" name="nombre" value="<?=$_GET['nombre']?>">
-        <label for="">apellido</label>
-        <input type="text" name="apellido" value="<?=$_GET['apellido']?>">
-        <label for="">sexo</label>
-        <input type="text" name="sexo" value="<?=$_GET['sexo']?>">
-        <label for="">direccion</label>
-        <input type="text" name="direccion" value="<?=$_GET['direccion']?>">
-        <label for="">telefono</label>
-        <input type="number" name="telefono" value="<?=$_GET['telefono']?>">
+<?php
+    class ActualizarVistaUsuario{
 
-        <button>Actualizar usuario</button>
-        <input type="hidden" name="id" value="<?=$_GET['id']?>">
-    </form>
-</body>
-</html>
+    private $valoresInput;
+
+    public function __construct($valoresInput){
+        $this->valoresInput=$valoresInput;
+    }
+    
+    public function imprimirActualizar(){
+        echo ' <form action="http://localhost/ProtectoraAnimales/controlador/controladorOrquestador.php" method="GET">
+            <label for="">nombre</label>
+            <input type="text" name="nombre" value="'.$this->valoresInput->nombre.'">
+            <label for="">apellido</label>
+            <input type="text" name="apellido" value="'.$this->valoresInput->apellido.'">
+            <label for="">sexo</label>
+            <input type="text" name="sexo" value="'.$this->valoresInput->sexo.'">
+            <label for="">direccion</label>
+            <input type="text" name="direccion" value="'.$this->valoresInput->direccion.'">
+            <label for="">telefono</label>
+            <input type="number" name="telefono" value="'.$this->valoresInput->telefono.'">
+        
+            <button>Actualizar usuario</button>
+            <input type="hidden" name="id" value="'.$this->valoresInput->id.'">
+            <input type="hidden" name="nombreTabla" value="Usuario">
+        </form>';
+    }
+}
+?>
+

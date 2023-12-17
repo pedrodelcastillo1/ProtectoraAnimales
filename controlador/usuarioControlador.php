@@ -13,21 +13,20 @@ class ControladorUsuario
         
     }
 
-    public static function retrocederAPaginaPrincipal()
-    {
-        header('Location: http://localhost/ProtectoraAnimales'); // Cuando se pulsa el boton de ir hacia atras
-    }
    
     public static function introducirUsuario()
     {
-        header('Location: http://localhost/ProtectoraAnimales/vista/usuario/introducirUsuario.php'); // Te muestra la vista de introducir usuario
+        include '../vista/usuario/introducirUsuario.php';
+        $interfazIntroducirUsuario=new IntroducirVistaUsuario();
+        $interfazIntroducirUsuario->imprimirIntroducir();
+        // header('Location: http://localhost/ProtectoraAnimales/vista/usuario/introducirUsuario.php'); // Te muestra la vista de introducir usuario
     }
    
     public static function insertarUsuario()
     {
         try 
         {
-            if ($_POST["nombre"] === "" || $_POST["apellido"] === "" || $_POST["sexo"] === "" || $_POST["direccion"] === "" || $_POST["telefono"] === "") 
+            if ($_GET["nombre"] === "" || $_GET["apellido"] === "" || $_GET["sexo"] === "" || $_GET["direccion"] === "" || $_GET["telefono"] === "") 
             {
                 throw new Exception("No puede haber nada vacío", 1);
             }
@@ -39,7 +38,7 @@ class ControladorUsuario
             $crudUsuario -> crear();
 
             // Redireccionar después de la inserción
-            header('Location: http://localhost/ProtectoraAnimales/vista/usuario/usuario.php');
+            // header('Location: http://localhost/ProtectoraAnimales/vista/usuario/usuario.php');
         } 
         
             catch (Exception $e) 
@@ -58,14 +57,11 @@ class ControladorUsuario
             $pathFichero='http://localhost/ProtectoraAnimales/vista/usuario/actualizarFilaUsuario.php?idUsuario='. $_GET['actualizaFila'];//ActualizarFila contiene el id del usuario a modificar
             $usuario=new Usuario();
 
-            $usuario=$usuario->obtieneDeId($_GET['actualizaFila']);
+            $usuario=$usuario->obtieneDeId($_GET['actualizaFila'])[0];//devuelve el objeto de tipo stdClass 
 
-            foreach ($usuario[0] as $key => $value) 
-            {
-                $pathFichero.="&".$key."=".$value;
-            }
-
-            header('Location:'. $pathFichero);
+            include_once '../vista/usuario/actualizarFilaUsuario.php';
+            $formularioActualizar=new ActualizarVistaUsuario($usuario);
+            $formularioActualizar->imprimirActualizar();
         } 
         
             catch (Exception $e) 
@@ -76,11 +72,9 @@ class ControladorUsuario
 
     public static function actualizarUsuario()
     {
-        $actualizarUsuario = new Usuario($_POST['id'], $_POST['nombre'], $_POST['apellido'], $_POST['sexo'], $_POST['direccion'], $_POST['telefono']);
-
-        $actualizarUsuario -> actualizar();
-
-        header('Location: http://localhost/ProtectoraAnimales/vista/usuario/usuario.php');
+        $interfazActualizarUsuario = new Usuario($_GET['id'], $_GET['nombre'], $_GET['apellido'], $_GET['sexo'], $_GET['direccion'], $_GET['telefono']);
+        $interfazActualizarUsuario -> actualizar();
+        // header('Location: http://localhost/ProtectoraAnimales/vista/usuario/usuario.php');
     }
 
     public static function borrarFila()
@@ -91,7 +85,6 @@ class ControladorUsuario
         try 
         {
             $usuario->borrar($_GET['borrarFila']);
-            // header('Location: http://localhost/ProtectoraAnimales/vista/usuario/usuario.php');
         } 
         
             catch (Exception $e) 
@@ -100,4 +93,32 @@ class ControladorUsuario
             }
     }
 }
+if (isset($_GET['reclamoTabla'])) {
 
+    ControladorUsuario::generarTabla();
+}
+
+if (isset($_GET['botonIntroducirPulsado'])) 
+{
+    ControladorUsuario::introducirUsuario();
+}
+
+if (isset($_GET['botonInsertarPulsado'])) 
+{
+    ControladorUsuario::insertarUsuario();
+}
+
+if (isset($_GET['actualizaFila'])) 
+{
+    ControladorUsuario::mostrarVistaActualizarUsuario();
+}
+
+if (isset($_GET['id'])) 
+{
+    ControladorUsuario::actualizarUsuario();
+}
+
+if (isset($_GET['borrarFila'])) 
+{
+    ControladorUsuario::borrarFila();
+}
